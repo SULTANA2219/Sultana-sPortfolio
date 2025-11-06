@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <title>Sultana's Portfolio </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:@wght700& display=swap">
+<style>
+body {
+font-family: Times New Roman, Arial, Sans-Serif;
+background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIZy5nyVZoLNQ-cWojtnTwrwjIk6KlAuqZjSwfLjTrzscWDoh2sPW-Ctc&s=10.jpg');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+margin: 20px;
+color: white;
+}
+.center-container {
+/*border: 2px solid white;*/
+width: 100%;
+height: 1000px;
+padding-left: 24px;
+justify-content: center;
+margin-left: 275px;
+/*transform: scale(3);*/
+}
+.container{
+width: 100%;
+padding: 20px;
+display: flex;
+}
+.container .slide-container {
+margin: 4px;
+display: none;
+/*position: relative;*/
+}
+.container .slide-container.active {
+    display: block;
+}
+.container .slide-container.hidden {
+
+}
+.dots-container {
+text-align: center;
+/*border: 2px solid white;*/
+height: 20px;
+padding: 10px;
+margin-left: -19px;
+}
+.dot-container {
+text-align: center;
+border: 2px solid white;
+color: white;
+border-radius: 50%;
+margin: 5px;
+cursor: pointer;
+display: inline-block;
+width: 12px;
+height: 12px;
+background: #bbb;
+transition: background 0.5s ease-in-out;
+}
+.dot-container.active {
+transform: scale(1.25);
+color: orange;
+background: orange;
+}
+.prev-container, .next-container {
+background-color: transparent;
+border: none;
+position: absolute;
+top: 275px;
+}
+.prev-container i, .next-container i {
+font-size: 40px;
+color: white;
+}
+.prev-container:hover, .next-container:hover {
+transform: scale(1.25);
+}
+.prev-container {
+left: 20px;
+}
+.next-container {
+right: -25px;
+}
+/*.container .slide-container .slide-container--left, .container .slide-container .slide-container--right {
+top: 0;
+backface-visibility: hidden;
+}
+.container .slide-container .slide-container--left {
+left: 0;
+border-left-width: 5px;
+transform: translate3d(1px, 0px, -40px) rotateY(-90deg);
+transform-origin: 0%;
+}
+.container .slide-container .slide-container--right {
+right: 0;
+border-right-width: 5px;
+transform: translate3d(-1px, 0px, -40px) rotateY(90deg);
+transform-origin: 100%;
+}*/
+.box {
+width: 250px;
+border-radius: 0px;
+border: 2px solid white;
+padding: 15px;
+margin: 10px 0;
+position: relative;
+display: block;
+backdrop-filter: blur(7px);
+}
+.image {
+border: none;
+width: 150px;
+height: 150px;
+background-size: cover;
+border-radius: 50%;
+margin: 20px;
+}
+
+h1 {
+position: relative;
+font-family: 'Caveat', cursive, Sans-Serif;
+font-size: 3rem;
+font-weight: bold;
+color: white;
+margin: 20px auto;
+text-align: center;
+width: fit-content;
+padding: 0 20px;
+}
+h1::before {
+content: '';
+position: absolute;
+left: -15px;
+right: -15px;
+top: 50%;
+height: 0.6em;
+background: repeating-linear-gradient(
+-15deg,
+white 0px,
+grey 1px,
+black 2px,
+grey 3px,
+white 4px
+);
+border-radius: 5px;
+transform: translateY(-50%) rotate(-1deg);
+z-index: -100;
+opacity: 0.9;
+}
+p {
+color: white;
+}
+a {
+color: white;
+text-decoration: none;
+}
+a:hover {
+color: orange ;
+}
+.carousel {
+display: flex;
+transition: transform 0.5s ease-in-out;
+}
+.slide {
+min-width: 100%;
+display: none;
+position: relative;
+}
+.slide.active {
+display: block;
+}
+.prev, .next {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: rgba(0, 0, 0, 0.5);
+color: white;
+border: none;
+padding: 10px;
+cursor: pointer;
+font-size: 18px;
+border-radius: 50%;
+z-index: 5;
+}
+.prev {
+left: 0.5px;
+}
+.next {
+right: 20px;
+}
+.prev:hover, .next:hover {
+background: rgba(0,0,0,0.8);
+}
+.dots {
+text-align: center;
+padding: 10px;
+}
+.dot {
+display: inline-block;
+width: 12px;
+height: 12px;
+margin: 0 5px;
+background: #bbb;
+border-radius: 50%;
+cursor: pointer;
+transition: background 0.3s;
+}
+.dot.active {
+background: orange;
+}
+.dot:hover {
+background: #717171;
+}
+.social-icons {
+display: flex;
+gap: 10px;
+justify-content: center;
+ }
+.social-icons i {
+color: white;
+font-size: 24px;
+}
+.box-scroll {
+overflow-y: auto;
+scrollbar-width: thin;
+scrollbar-color: orange white;
+border: 2px solid white;
+padding: 15px;
+border-radius: 0px;
+display: fixed;
+height: 100px;
+width: 250px;
+backdrop-filter: blur(7px);
+}
+.box-scroll::-webkit-scrollbar {
+width: 5px;
+}
+.box-scroll::-webkit-scrollbar-track {
+background: rgba(255 255 255 0.1);
+
+}
+.box-scroll::-webkit-scrollbar-thumb {
+background: orange;
+}
+.box-scroll::-webkit-scrollbar-thumb:hover {
+background: #ff7f00;
+}
+.container-scroll {
+max-height: 50vh;
+overflow-y: auto;
+scrollbar-width: thin;
+scrollbar-color: orange white;
+}
+.container-scroll::-webkit-scrollbar {
+width: 8px;
+}
+.container-scroll::-webkit-scrollbar-track {
+background: rgba(255 255 255 0.1);
+
+}
+.container-scroll::-webkit-scrollbar-thumb {
+background: orange;
+
+
+}
+.container-scroll::-webkit-scrollbar-thumb:hover {
+background: #ff7f00;
+}
+</style>
+</head>
+<body>
+<div class="center-container">
+<div class="container">
+<div class="slide-container active">
+<h1>Me</h1>
+<div class="box">
+<div class="image"><img src="IMG_20250207_204106027.jpg" alt="Passionate Coder, Sultana"></div>
+<p>Sultana Jahan Tahmina</p>
+<p>| Full-Stack Web Developer |</p>
+<div class="social-icons">
+<a href="https://www.facebook.com/share/1Dj7rokzU5/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+<a href="https://bd.linkedin.com/in/sultana-jahan-tahmina-621aa2243" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+<a href="mailto:sultanajahantahmina19@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+<a href="https://github.com/SULTANA2219" target="_blank"><i class="fa-brands fa-github"></i></a>
+<a href="https://www.instagram.com/su_ltana3398?igsh=MXh4MHpyYm5rbzd6bg==" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
+<a href="https://wa.me/+8801986799171" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+</div>
+</div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
+<div class="slide-container">
+<h1>Skills</h1>
+<div class="box">
+<p>HTML, CSS, Tailwand CSS, Bootstrap, JS, node.js, react.js, c, c++, Java, MySQL, pHp, Python, Ruby, GitHub, XAMPP, VS studio, OnlineGDB.</p>
+</div>
+</div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
+<div class="slide-container">
+<h1>Project</h1>
+<div class="box">
+ <div class="carousel">
+ <div class="slide active">
+ <a href><ul><li> E-Commerce website</li></ul></a>
+ <p></p>
+ </div>
+ <div class="slide">
+<a href><ul><li> Landing Page</li></ul></a>
+<p></p>
+ </div>
+<div class="slide">
+ <a href><ul><li> IIUC Website (University Project)</li></ul></a>
+<p></p>
+</div>
+<div class="slide">
+<a href><ul><li> Social Media Dashboard</li></ul></a>
+<p></p>
+</div>
+<div class="slide">
+<a href><ul><li> Sultana's Brand</li></ul></a>
+<p></p>
+</div>
+</div>
+ <button class="prev" aria-label="Previous slide">&#10094;</button>
+<button class="next" aria-label="Next slide">&#10095;</button>
+<div class="dots">
+<span class="dot active" data-slide="0"></span>
+<span class="dot" data-slide="1"></span>
+<span class="dot" data-slide="2"></span>
+<span class="dot" data-slide="3"></span>
+<span class="dot" data-slide="4"></span>
+</div>
+</div>
+</div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
+<div class="slide-container hidden">
+<h1>My Story</h1>
+<div class="box-scroll">
+<div class="container-scroll">
+<div class="image" style="float: right;"><img src="IMG_20250207_204106027.jpg" alt="Passionate Coder, Sultana"></div>
+<p>One day, her father bought a PC for her elder sister as study material. Since childhood, Sultana had been familiar with computer games and other IT experiences. She gradually developed IT skills and was admitted to a Bachelor’s program in CCE (Computer and Communication Engineering) in 2024. Thus, it became her second heart partner ❤️.</p>
+
+<p>Sultana also explored other fields, but IT is something special to her ❤️‍🔥. She envisions herself five years from now — coding, creating websites, hacking ethically(Cybersecurity), and fighting against bad energies at 3 a.m. in a smart, automated, luxurious home surrounded by marine nature. And those automated components will be made by her. 🖥️🔥
+</p>
+</div>
+</div>
+</div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
+</div>
+<button class="prev-container" aria-label="Previous Slide"><i class="fa-solid fa-caret-left"></i></button>
+<button class="next-container" aria-label="Next Slide"><i class="fa-solid fa-caret-right"></i></button>
+<div class="dots-container">
+<span class="dot-container active" data-slide="0"></span>
+<span class="dot-container" data-slide="1"></span>
+<span class="dot-container" data-slide="2"></span>
+<span class="dot-container" data-slide="3"></span>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const slidesContainer = document.querySelectorAll('.slide-container');
+const dotsContainer = document.querySelectorAll('.dot-container');
+const prevContainer = document.querySelector('.prev-container');
+const nextContainer = document.querySelector('.next-container');
+let currentIndex = 0;
+let currIndex = 0;
+
+function showSlide(index) {
+slides.forEach((slide, i) => {
+slide.classList.toggle('active', i===index);
+});
+dots.forEach((dot, i) => {
+dot.classList.toggle('active', i=== index);
+});
+}
+
+function prevSlide() {
+currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+showSlide(currentIndex);
+}
+
+function nextSlide() {
+currentIndex = (currentIndex + 1 ) % slides.length;
+showSlide(currentIndex);
+}
+
+function showSlideContainer(index) {
+    slidesContainer.forEach((slideCo, i) => {
+        slideCo.classList.toggle('active', i === index);
+    });
+    dotsContainer.forEach((dotCo, i) => {
+        dotCo.classList.toggle('active', i === index);
+    });
+}
+
+function prevSlideContainer() {
+    currIndex = (currIndex - 1 + slidesContainer.length) % slidesContainer.length;
+    showSlideContainer(currIndex);
+}
+
+function nextSlideContainer() {
+    currIndex = (currIndex + 1) % slidesContainer.length;
+    showSlideContainer(currIndex);
+}
+
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
+nextContainer.addEventListener('click', nextSlideContainer);
+prevContainer.addEventListener('click', prevSlideContainer);
+
+dots.forEach((dot, index) => {
+dot.addEventListener('click', () => {
+currentIndex = index;
+showSlide(currentIndex);
+});
+});
+
+dotsContainer.forEach((dotco, index) => {
+    dotco.addEventListener('click', () => {
+        currIndex = index;
+        showSlideContainer(currIndex);
+    });
+});
+
+setInterval(nextSlide, 3000);
+//setInterval(nextSlideContainer, 1000);
+
+document.addEventListener('keydown', (e) => {
+if (e.key ==='ArrowLeft') prevSlide();
+if (e.key ==='ArrowRight') nextSlide();
+});
+
+document.addEventListener('keydown', (f) => {
+    if (f.key === 'ArrowLeft') {
+        f.preventDefault();
+        prevSlideContainer();
+    }
+    if (f.key === 'ArrowRight') {
+        f.preventDefault();
+        nextSlideContainer();
+    }
+});
+});
+
+
+</script>
+</body>
+</html>
